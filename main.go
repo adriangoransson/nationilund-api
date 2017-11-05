@@ -19,10 +19,7 @@ func main() {
 
 	router.GET("/about", func (c *gin.Context) {
 		title := "About"
-		c.HTML(200, "about.tmpl", gin.H{
-			"title":		title,
-			"pageTitle":	createTitle(title),
-		})
+		c.HTML(200, "about.tmpl", gin.H{"title": title})
 	})
 
 	router.Static("/assets", "./assets")

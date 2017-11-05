@@ -10,10 +10,7 @@ func setupApi(router *gin.Engine) {
 
 	api.GET("/", func (c *gin.Context) {
 		title := "API"
-		c.HTML(200, "api.tmpl", gin.H{
-			"title":	 title,
-			"pageTitle": createTitle("API"),
-		})
+		c.HTML(200, "api.tmpl", gin.H{"title": title})
 	})
 
 

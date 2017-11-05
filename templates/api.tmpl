@@ -1,5 +1,7 @@
 {{ template "base.header.tmpl" . }}
 
+<h1>{{ .title }}</h1>
+
 <p>Base URL <code>https://nationilund.se/api/</code></p>
 
 <p>Get events for today, this week or this month</p>
@@ -19,15 +21,23 @@
 
 <pre class="bg-light"><code>[
   {
-    id            string
-    summary       string
-    description   string
-    url           string
-    location      string
-    nation        string
-    date_start    date string (RFC3339)
-    date_end      date string (RFC3339)
-    last_updated  date string (RFC3339)
+    id              string
+    summary         string
+    description     string
+    url             string
+    image_url       string
+    location        string
+
+    organizer      {
+      name          string
+      email         string
+    }
+
+    date            {
+      start         date string (RFC3339)
+      end           date string (RFC3339)
+      last_updated  date string (RFC3339)
+    }
   },
   {...}
 ]
