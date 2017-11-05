@@ -1,0 +1,36 @@
+{{ template "base.header.tmpl" . }}
+
+<p>Base URL <code>https://nationilund.se/api/</code></p>
+
+<p>Get events for today, this week or this month</p>
+<pre class="bg-light"><code>  GET /day
+  GET /week
+  GET /month
+</code></pre>
+
+<p>Get events for a specific date, or the week/month that date occurs</p>
+<pre class="bg-light"><code>  GET /day/YYYY-MM-DD
+  GET /week/YYYY-MM-DD
+  GET /month/YYYY-MM-DD
+</code></pre>
+
+<h2>Response</h2>
+<p>A JSON list of event objects</p>
+
+<pre class="bg-light"><code>[
+  {
+    id            string
+    summary       string
+    description   string
+    url           string
+    location      string
+    nation        string
+    date_start    date string (RFC3339)
+    date_end      date string (RFC3339)
+    last_updated  date string (RFC3339)
+  },
+  {...}
+]
+</code></pre>
+
+{{ template "base.footer.tmpl" }}
