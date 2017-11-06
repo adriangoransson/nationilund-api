@@ -4,10 +4,10 @@
 
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item {{ if eq .title "API" -}} active {{- end }}">
+        <li class="nav-item {{ if .title }}{{ if eq .title "API" -}} active {{- end }}{{ end }}">
           <a class="nav-link" href="/api">API</a>
         </li>
-        <li class="nav-item {{ if eq .title "About" -}} active {{- end }}">
+        <li class="nav-item {{ if .title }}{{ if eq .title "About" -}} active {{- end }}{{ end }}">
           <a class="nav-link" href="/about">About</a>
         </li>
       </ul>

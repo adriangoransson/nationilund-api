@@ -4,17 +4,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const PAGETITLE = "Nation i Lund"
-
 func main() {
 	router := gin.Default()
 
 	setupApi(router)
 
-	router.LoadHTMLGlob("templates/*.tmpl")
+	router.LoadHTMLGlob("templates/*")
 
 	router.GET("/", func (c *gin.Context) {
-		c.HTML(200, "index.tmpl", gin.H{"title": PAGETITLE})
+		c.HTML(200, "index.tmpl", gin.H{})
 	})
 
 	router.GET("/about", func (c *gin.Context) {
