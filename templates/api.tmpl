@@ -2,22 +2,22 @@
 
 <h1>{{ .title }}</h1>
 
-<p>Base URL <code>https://nationilund.se/api/</code></p>
+<p>Base URL <code>https://nationilund.se/api</code></p>
 
-<p>Get events for today, this week or this month</p>
+<p>Get events for today, this week or this month.</p>
 <pre class="bg-light"><code>  GET /day
   GET /week
   GET /month
 </code></pre>
 
-<p>Get events for a specific date, or the week/month that date occurs</p>
+<p>Get events for a specific date, or the week/month that date occurs.</p>
 <pre class="bg-light"><code>  GET /day/YYYY-MM-DD
   GET /week/YYYY-MM-DD
   GET /month/YYYY-MM-DD
 </code></pre>
 
 <h2>Response</h2>
-<p>A JSON list of event objects</p>
+<p>A JSON list of event objects.</p>
 
 <pre class="bg-light"><code>[
   {
@@ -28,12 +28,12 @@
     image_url       string
     location        string
 
-    organizer      {
+    organizer {
       name          string
       email         string
     }
 
-    date            {
+    date {
       start         date string (RFC3339)
       end           date string (RFC3339)
       last_updated  date string (RFC3339)
@@ -42,5 +42,25 @@
   {...}
 ]
 </code></pre>
+
+<p>In case of errors the API response will have one of the following status codes.</p>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Status code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400</td>
+      <td>Date was incorrectly formatted.</td>
+    </tr>
+    <tr>
+      <td>503</td>
+      <td>Internal fetching of data failed.</td>
+    </tr>
+  </tbody>
+</table>
 
 {{ template "base.footer.tmpl" }}

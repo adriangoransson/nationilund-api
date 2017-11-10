@@ -41,7 +41,7 @@ func setupApi(router *gin.Engine) {
 
 			events, err := studentlund.GetDay(date)
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
@@ -71,7 +71,7 @@ func setupApi(router *gin.Engine) {
 
 			events, err := studentlund.GetWeek(date)
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
@@ -101,7 +101,7 @@ func setupApi(router *gin.Engine) {
 
 			events, err := studentlund.GetMonth(date)
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
