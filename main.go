@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"os/signal"
 	"net/http"
+	"os/signal"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,11 +19,11 @@ func main() {
 
 	router.LoadHTMLGlob("templates/*")
 
-	router.GET("/", func (c *gin.Context) {
+	router.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.tmpl", gin.H{})
 	})
 
-	router.GET("/about", func (c *gin.Context) {
+	router.GET("/about", func(c *gin.Context) {
 		title := "About"
 		c.HTML(200, "about.tmpl", gin.H{"title": title})
 	})
@@ -33,7 +33,7 @@ func main() {
 	// Handle server and shutdown. This is a copy-paste from the readme.
 	// https://github.com/gin-gonic/gin/blob/master/examples/graceful-shutdown/graceful-shutdown/server.go
 	srv := &http.Server{
-		Addr: 	":8080",
+		Addr:    ":8080",
 		Handler: router,
 	}
 

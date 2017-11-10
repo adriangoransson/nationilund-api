@@ -3,9 +3,9 @@ package main
 import (
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/adriangoransson/gin-cache"
 	"github.com/adriangoransson/gin-cache/persistence"
+	"github.com/gin-gonic/gin"
 
 	"github.com/adriangoransson/studentlund-calendar"
 )
@@ -14,12 +14,10 @@ func setupApi(router *gin.Engine) {
 	api := router.Group("/api")
 	store := persistence.NewInMemoryStore(time.Hour)
 
-
-	api.GET("/", func (c *gin.Context) {
+	api.GET("/", func(c *gin.Context) {
 		title := "API"
 		c.HTML(200, "api.tmpl", gin.H{"title": title})
 	})
-
 
 	day := api.Group("/day")
 	{
@@ -33,7 +31,7 @@ func setupApi(router *gin.Engine) {
 			c.JSON(200, events)
 		}))
 
-		day.GET("/:date", cache.CachePage(store, time.Hour, func (c *gin.Context) {
+		day.GET("/:date", cache.CachePage(store, time.Hour, func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {
@@ -53,7 +51,7 @@ func setupApi(router *gin.Engine) {
 
 	week := api.Group("/week")
 	{
-		week.GET("", cache.CachePageWithDurationFn(store, getCacheDuration(time.Hour), func (c *gin.Context) {
+		week.GET("", cache.CachePageWithDurationFn(store, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentWeek()
 			if err != nil {
 				c.AbortWithError(400, err)
@@ -63,7 +61,7 @@ func setupApi(router *gin.Engine) {
 			c.JSON(200, events)
 		}))
 
-		week.GET("/:date", cache.CachePage(store, time.Hour, func (c *gin.Context) {
+		week.GET("/:date", cache.CachePage(store, time.Hour, func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {
@@ -83,7 +81,7 @@ func setupApi(router *gin.Engine) {
 
 	month := api.Group("/month")
 	{
-		month.GET("", cache.CachePageWithDurationFn(store, getCacheDuration(time.Hour), func (c *gin.Context) {
+		month.GET("", cache.CachePageWithDurationFn(store, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentMonth()
 			if err != nil {
 				c.AbortWithError(400, err)
@@ -93,7 +91,7 @@ func setupApi(router *gin.Engine) {
 			c.JSON(200, events)
 		}))
 
-		month.GET("/:date", cache.CachePage(store, time.Hour, func (c *gin.Context) {
+		month.GET("/:date", cache.CachePage(store, time.Hour, func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {

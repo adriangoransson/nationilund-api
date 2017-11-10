@@ -11,7 +11,7 @@ func getCacheDuration(cacheDuration time.Duration) func() time.Duration {
 		currentTime := time.Now()
 		newTime := time.Now().Add(cacheDuration)
 
-		if (newTime.Day() > currentTime.Day()) {
+		if newTime.Day() > currentTime.Day() {
 			// Ignore error because "local"
 			location, _ := time.LoadLocation("Local")
 			// Truncate and round only works for UTC time
