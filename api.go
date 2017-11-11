@@ -7,7 +7,7 @@ import (
 	"github.com/adriangoransson/gin-cache/persistence"
 	"github.com/gin-gonic/gin"
 
-	"github.com/adriangoransson/studentlund-calendar"
+	"github.com/adriangoransson/studentlund"
 )
 
 func setupApi(router *gin.Engine) {
