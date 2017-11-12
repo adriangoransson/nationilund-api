@@ -3,9 +3,11 @@ package main
 import (
 	"time"
 
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+
 	"github.com/adriangoransson/gin-cache"
 	"github.com/adriangoransson/gin-cache/persistence"
-	"github.com/gin-gonic/gin"
 
 	"github.com/adriangoransson/studentlund"
 )
@@ -13,6 +15,8 @@ import (
 func setupApi(router *gin.Engine) {
 	api := router.Group("/api")
 	store := persistence.NewInMemoryStore(time.Hour)
+
+	api.Use(cors.Default())
 
 	api.GET("/", func(c *gin.Context) {
 		title := "API"
