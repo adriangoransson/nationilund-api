@@ -8,7 +8,7 @@ build:
 	cd frontend-src && yarn run build --progress
 	cp -r assets templates dist
 	go build
-	mv studentlund-api dist
+	mv nationilund dist
 
 get:
 	cd frontend-src && yarn install
