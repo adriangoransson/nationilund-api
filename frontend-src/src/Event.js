@@ -1,37 +1,12 @@
 import m from 'mithril';
-
-function formatHours(date) {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-
-  hours = (hours < 10 ? '0' : '') + hours;
-  minutes = (minutes < 10 ? '0' : '') + minutes;
-
-  return `${hours}:${minutes}`;
-}
-
-function diffTime(dateStart, dateEnd) {
-  const now = new Date();
-
-  let started = false;
-  let ongoing = false;
-
-  if (now.getTime() > dateStart.getTime()) {
-    started = true;
-
-    if (now.getTime() < dateEnd.getTime()) {
-      ongoing = true;
-    }
-  }
-
-  return { started, ongoing };
-}
+import utils from './utils';
 
 function Event(data) {
+  const now = new Date();
   const dateStart = new Date(data.date.start);
   const dateEnd = new Date(data.date.end);
 
-  let { started, ongoing } = diffTime(dateStart, dateEnd);
+  let { started, ongoing } = utils.diffTime(dateStart, dateEnd);
 
   // Collapse initially if we are past the event start
   const collapsed = started && !ongoing;
@@ -48,7 +23,7 @@ function Event(data) {
       let cardBody = null;
 
       // Check if the event has started or ended on every redraw
-      ({ started, ongoing } = diffTime(dateStart, dateEnd));
+      ({ started, ongoing } = utils.diffTime(dateStart, dateEnd));
 
       if (vnode.state.collapsed) {
         cardTitle = 'Show';
@@ -77,6 +52,13 @@ function Event(data) {
         class: ongoing ? 'text-danger' : 'text-muted',
       };
 
+      let endDate;
+      if (dateEnd.getDate() !== now.getDate()) {
+        endDate = `${utils.formatDate(dateEnd)} ${utils.formatHours(dateEnd)}`;
+      } else {
+        endDate = utils.formatHours(dateEnd);
+      }
+
       return (
         m(
           '.card.mt-3.md-3',
@@ -85,7 +67,7 @@ function Event(data) {
             event.summary,
             m(
               '.float-lg-right', timeOpts,
-              ` ${formatHours(dateStart)} - ${formatHours(dateEnd)}`,
+              ` ${utils.formatHours(dateStart)} - ${endDate}`,
             ),
           ),
           cardBody,
