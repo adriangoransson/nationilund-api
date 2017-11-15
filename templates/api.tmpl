@@ -10,7 +10,9 @@
   GET /month
 </code></pre>
 
-<p>Get events for a specific date, or the week/month that date occurs.</p>
+<p>Get events for a specific date, or the week/month that date occurs.<br>
+These routes are IP limited to 30 requests/minute.</p>
+
 <pre class="bg-light"><code>  GET /day/YYYY-MM-DD
   GET /week/YYYY-MM-DD
   GET /month/YYYY-MM-DD
@@ -55,6 +57,10 @@
     <tr>
       <td>400</td>
       <td>Date was incorrectly formatted.</td>
+    </tr>
+    <tr>
+      <td>429</td>
+      <td>Rate limit exceeded.</td>
     </tr>
     <tr>
       <td>503</td>
