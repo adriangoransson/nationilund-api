@@ -18,6 +18,16 @@ function formatHours(date) {
   return `${hours}:${minutes}`;
 }
 
+function insertDateIfNeeded(date) {
+  const now = new Date();
+
+  if (date.getDate() === now.getDate()) {
+    return formatHours(date);
+  }
+
+  return `${formatDate(date)} ${formatHours(date)}`;
+}
+
 function diffTime(dateStart, dateEnd) {
   const now = new Date();
 
@@ -36,6 +46,7 @@ function diffTime(dateStart, dateEnd) {
 }
 
 export default {
+  insertDateIfNeeded,
   formatDate,
   formatHours,
   diffTime,

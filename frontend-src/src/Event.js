@@ -2,7 +2,6 @@ import m from 'mithril';
 import utils from './utils';
 
 function Event(data) {
-  const now = new Date();
   const dateStart = new Date(data.date.start);
   const dateEnd = new Date(data.date.end);
 
@@ -52,12 +51,8 @@ function Event(data) {
         class: ongoing ? 'text-danger' : 'text-muted',
       };
 
-      let endDate;
-      if (dateEnd.getDate() !== now.getDate()) {
-        endDate = `${utils.formatDate(dateEnd)} ${utils.formatHours(dateEnd)}`;
-      } else {
-        endDate = utils.formatHours(dateEnd);
-      }
+      const startDate = utils.insertDateIfNeeded(dateStart);
+      const endDate = utils.insertDateIfNeeded(dateEnd);
 
       return (
         m(
@@ -67,7 +62,7 @@ function Event(data) {
             event.summary,
             m(
               '.float-lg-right', timeOpts,
-              ` ${utils.formatHours(dateStart)} - ${endDate}`,
+              ` ${startDate} - ${endDate}`,
             ),
           ),
           cardBody,
