@@ -7,11 +7,8 @@ function Event(data) {
 
   let { started, ongoing } = utils.diffTime(dateStart, dateEnd);
 
-  // Collapse initially if we are past the event start
-  const collapsed = started && !ongoing;
-
   return {
-    collapsed,
+    collapsed: true,
     started,
     ongoing,
     data,
