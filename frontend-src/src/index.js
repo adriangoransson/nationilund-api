@@ -13,7 +13,20 @@ const View = {
     }
 
     if (Events.error) {
-      return m('.alert.alert-danger', Events.error);
+      let message = '';
+      switch (Events.error) {
+        case 429:
+          message = 'Whoa there, buddy! You are requesting data at speeds too great for this poor service. API error: "Rate limit exceeded."';
+          break;
+        case 503:
+          message = 'Something bad happened behind the scenes, sorry about that! API error: "Internal fetching of data failed."';
+          break;
+        default:
+          message = `Well. Something went wrong... HTTP status code: ${Events.error}`;
+          break;
+      }
+
+      return m('.alert.alert-danger', message);
     }
 
     if (vnode.state.filter) {

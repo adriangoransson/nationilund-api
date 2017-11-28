@@ -14,6 +14,13 @@ const Events = {
     const req = m.request({
       url: config.API_URL,
       method: 'GET',
+      extract(xhr, options) {
+        if (xhr.status === 200) {
+          return options.deserialize(xhr.responseText);
+        }
+
+        return xhr;
+      },
     });
 
     req.then((resp) => {
@@ -23,7 +30,7 @@ const Events = {
 
     req.catch((err) => {
       Events.loading = false;
-      Events.error = err.message;
+      Events.error = err.status;
     });
   },
 };
