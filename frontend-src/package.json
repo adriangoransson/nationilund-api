@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "mithril": "^1.1.5"
+    "mithril": "^1.1.5",
+    "pikaday": "https://github.com/adriangoransson/Pikaday"
   },
   "scripts": {
     "start": "webpack -d",

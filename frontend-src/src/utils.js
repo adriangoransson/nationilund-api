@@ -1,11 +1,16 @@
-function formatDate(date) {
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
+function padNumber(n) {
+  return (n < 10 ? '0' : '') + n;
+}
 
-  month = (month < 10 ? '0' : '') + month;
-  day = (day < 10 ? '0' : '') + day;
+function apiDateFormat(date) {
+  const offset = date.getTimezoneOffset() / 60;
+  date.setHours(date.getHours() - offset);
 
-  return `${day}/${month}`;
+  const year = date.getFullYear();
+  const month = padNumber(date.getMonth() + 1);
+  const day = padNumber(date.getDate());
+
+  return `${year}-${month}-${day}`;
 }
 
 function formatHours(date) {
@@ -16,16 +21,6 @@ function formatHours(date) {
   minutes = (minutes < 10 ? '0' : '') + minutes;
 
   return `${hours}:${minutes}`;
-}
-
-function insertDateIfNeeded(date) {
-  const now = new Date();
-
-  if (date.getDate() === now.getDate()) {
-    return formatHours(date);
-  }
-
-  return `${formatDate(date)} ${formatHours(date)}`;
 }
 
 function diffTime(dateStart, dateEnd) {
@@ -46,8 +41,7 @@ function diffTime(dateStart, dateEnd) {
 }
 
 export default {
-  insertDateIfNeeded,
-  formatDate,
+  apiDateFormat,
   formatHours,
   diffTime,
 };

@@ -48,8 +48,8 @@ function Event(data) {
         class: ongoing ? 'text-danger' : 'text-muted',
       };
 
-      const startDate = utils.insertDateIfNeeded(dateStart);
-      const endDate = utils.insertDateIfNeeded(dateEnd);
+      const startDate = utils.formatHours(dateStart);
+      const endDate = utils.formatHours(dateEnd);
 
       return (
         m(

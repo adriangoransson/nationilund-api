@@ -2,17 +2,29 @@ import m from 'mithril';
 
 import Event from './Event';
 import config from './config';
+import utils from './utils';
 
 const Events = {
   list: [],
   error: '',
   loading: false,
 
-  load() {
+  load(date = new Date()) {
     Events.loading = true;
+    let url = config.API_URL;
+
+    if (date !== null && date.toISOString) {
+      const iso = utils.apiDateFormat(date);
+      const todayIso = utils.apiDateFormat(new Date());
+
+      // date appended routes are rate limited
+      if (iso !== todayIso) {
+        url += `/${iso}`;
+      }
+    }
 
     const req = m.request({
-      url: config.API_URL,
+      url,
       method: 'GET',
       extract(xhr, options) {
         if (xhr.status === 200) {
