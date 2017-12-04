@@ -22,6 +22,9 @@ export default {
         vnode.state.date = this.getDate();
         vnode.attrs.callback(vnode.state.date);
       },
+      showWeekNumber: true,
+      firstDay: 1,
+      yearRange: 1,
     });
   },
   view(vnode) {
