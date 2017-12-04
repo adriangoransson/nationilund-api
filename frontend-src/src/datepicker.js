@@ -11,6 +11,7 @@ export default {
     button.innerText = `Today (${utils.apiDateFormat(new Date())})`;
     button.type = 'button';
     button.classList = 'btn btn-light';
+    button.style = 'cursor: pointer;';
 
     vnode.dom.appendChild(button);
 
