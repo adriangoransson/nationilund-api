@@ -214,9 +214,27 @@ body {
   opacity: 1;
 }
 
+/* Pikaday */
 .pika-single {
   border: none;
   font-family: inherit;
+}
+
+.is-today .pika-button {
+  color: #A7E15A;
+}
+
+.is-selected .pika-button {
+  background: #A7E15A;
+  box-shadow: none;
+}
+
+.pika-button:hover {
+  background: #A7E15A;
+}
+
+.is-today .pika-button:hover {
+  color: #fff;
 }
 
 /* Events */
