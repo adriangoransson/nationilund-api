@@ -23,7 +23,7 @@ body {
 }
 
 .header .logo {
-  height: 30px;
+  height: 25px;
 }
 
 .header .menu {
@@ -35,8 +35,9 @@ body {
 
 .header .menu-item {
   color: #B0B0B0;
+  font-size: 14px;
   font-weight: 700;
-  padding: 10px 15px;
+  padding: 5px 10px;
   text-decoration: none;
 }
 
@@ -94,6 +95,7 @@ body {
 
 .main pre {
   margin-bottom: 1em;
+  overflow: scroll;
 }
 
 .main pre code {
@@ -139,8 +141,8 @@ body {
   display: flex;
   flex: 1;
   justify-content: center;
-  padding-left: 15px;
-  padding-right: 65px;
+  padding-left: 10px;
+  padding-right: 60px;
 }
 
 .date-bar .link-wrapper {
@@ -156,7 +158,7 @@ body {
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .date-bar .date.current-date {
@@ -405,12 +407,17 @@ body {
     height: 35px;
   }
 
+  .header .menu-item {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
   .main {
     padding: 20px 0;
   }
 
   .date-bar .date-navigation {
-    padding-right: 75px;
+    padding-right: 70px;
   }
 
   .date-bar .date-picker-button {
