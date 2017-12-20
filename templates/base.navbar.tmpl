@@ -1,16 +1,10 @@
-<nav class="navbar navbar-expand navbar-light bg-light">
+<header class="header">
   <div class="container">
-    <a class="navbar-brand" href="/">Nation i Lund</a>
-
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item {{ if .title }}{{ if eq .title "API" -}} active {{- end }}{{ end }}">
-          <a class="nav-link" href="/api">API</a>
-        </li>
-        <li class="nav-item {{ if .title }}{{ if eq .title "About" -}} active {{- end }}{{ end }}">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-    </div>
+    <a class="logo" href="/"><img class="logo" src="/assets/images/logo.svg" alt="Nation i Lund" /></a>
+    <nav class="menu">
+      <a class="menu-item {{- if not .title }} current {{ end -}}" href="/">Kalender</a>
+      <a class="menu-item {{ if .title }}{{ if eq .title "API" -}} current {{- end }}{{ end }}" href="/api">API</a>
+      <a class="menu-item {{ if .title }}{{ if eq .title "About" -}} current {{- end }}{{ end }}" href="/about">Om</a>
+    </nav>
   </div>
-</nav>
+</header>
