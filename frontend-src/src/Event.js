@@ -8,62 +8,37 @@ function Event(data) {
   let { started, ongoing } = utils.diffTime(dateStart, dateEnd);
 
   return {
-    collapsed: true,
+    open: false,
     started,
     ongoing,
     data,
 
     view(vnode) {
       const event = vnode.state.data;
-      let cardTitle = '';
-      let cardBody = null;
 
-      // Check if the event has started or ended on every redraw
       ({ started, ongoing } = utils.diffTime(dateStart, dateEnd));
 
-      if (vnode.state.collapsed) {
-        cardTitle = 'Show';
-      } else {
-        cardTitle = 'Hide';
-        cardBody = [
-          m(
-            '.card-body',
-            m(
-              'h6.card-subtitle.mb-2.text-muted',
-              `${event.organizer.name} - ${event.location}`,
-            ),
-            m(
-              'p.card-text[style=white-space:pre-line]',
-              event.description,
-            ),
-          ),
-        ];
-      }
-
-      const toggleCollapse = () => {
-        vnode.state.collapsed = !vnode.state.collapsed;
-      };
-
-      const timeOpts = {
-        class: ongoing ? 'text-danger' : 'text-muted',
-      };
+      const title = event.summary.toLowerCase().includes(event.organizer.name.toLowerCase()) ? event.summary : `${event.summary} | ${event.organizer.name}`;
+      const description = utils.intersperse(event.description.split('\n'), m('br'));
 
       const startDate = utils.formatHours(dateStart);
       const endDate = utils.formatHours(dateEnd);
 
+      const slug = utils.slugify(event.organizer.name);
+
+      const openClass = this.open ? '.open' : '';
+
       return (
-        m(
-          '.card.mt-3.md-3',
-          m(
-            `.card-header[style=cursor:pointer][title=${cardTitle}]`, { onclick: toggleCollapse },
-            event.summary,
-            m(
-              '.float-lg-right', timeOpts,
-              ` ${startDate} - ${endDate}`,
-            ),
-          ),
-          cardBody,
-        )
+        m(`.single-event.${slug}${openClass}`, { onclick: () => { this.open = !this.open; } }, [
+          m('.content', [
+            m('p.time', `${startDate} – ${endDate}`),
+            m('h1.title', title),
+            m('span.plus'),
+          ]),
+          m('div.description', [
+            m('p', description),
+          ]),
+        ])
       );
     },
   };
