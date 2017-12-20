@@ -1,20 +1,25 @@
 {{ template "base.header.tmpl" . }}
 
-<h1>{{ .title }}</h1>
+<div class="main">
+  <h1>{{ .title }}</h1>
 
-<p>Nation i Lund is a service that aims to provide a faster and easier way to find out what is happening around the student nations in Lund.<br>
-It's built on top of data available at <a href="https://www.studentlund.se/">studentlund.se</a>, wrapping it in a nicer <a href="/api">JSON API</a>.</p>
+  <p>Nation i Lund is a service that aims to provide a faster and easier way to find out what is happening around the student nations in Lund.<br>
+  It's built on top of data available at <a href="https://www.studentlund.se/">studentlund.se</a>, wrapping it in a nicer <a href="/api">JSON API</a>.</p>
 
-<h3>Open source</h3>
-<p>Every line of code behind Nation i Lund is open source and available at Github.</p>
-<dl>
-    <dt><a href="https://github.com/adriangoransson/studentlund">adriangoransson/studentlund</a></dt>
-    <dd>Go library to parse data from studentlund.se.</dd>
-    <dt><a href="https://github.com/adriangoransson/nationilund">adriangoransson/nationilund</a></dt>
-    <dd>This site. With backend written in Go using the Gin framework and frontend using Mithril and Bootstrap.</dd>
-</dl>
+  <h3>Open source</h3>
+  <p>Every line of code behind Nation i Lund is open source and available at Github.</p>
+  <p>
+    <a href="https://github.com/adriangoransson/studentlund">adriangoransson/studentlund</a><br />
+    Go library to parse data from studentlund.se.
+  </p>
+  <p>
+    <a href="https://github.com/adriangoransson/nationilund">adriangoransson/nationilund</a><br />
+    This site. With backend written in Go using the Gin framework and frontend using Mithril and Bootstrap.
+  </p>
+  </dl>
 
-<h3>Creator</h3>
-<p>Nation i Lund was created by <a href="https://adriang.se">Adrian Göransson</a>, Computer Science and Engineering student at Lund University (LTH D17).</p>
+  <h3>Creator</h3>
+  <p>Nation i Lund was created by <a href="https://adriang.se">Adrian Göransson</a>, Computer Science and Engineering student at Lund University (LTH D17).</p>
+</div>
 
 {{ template "base.footer.tmpl" }}
