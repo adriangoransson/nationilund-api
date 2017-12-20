@@ -262,12 +262,60 @@ body {
   padding: 15px 10px;
 }
 
+.events .signle-event.vastgota-nation {
+  /* Default yellow */
+}
+
+.events .single-event.helsingkrona-nation {
+  /* Mint */
+  border-top-color: #18AE90;
+  background-color: #F5FAF9;
+}
+
+.events .single-event.goteborgs-nation {
+  /* Red */
+  border-top-color: #CB2C43;
+  background-color: #FAF5F6;
+}
+
+.events .single-event.blekingska-nationen {
+  /* Purple */
+  border-top-color: #944eb1;
+  background-color: #F9F5FA;
+}
+
+.events .single-event.hallands-nation {
+  /* Pink */
+  border-top-color: #e17bb6;
+  background-color: #FAF5F8;
+}
+
+.events .single-event.lunds-nation {
+  /* Orange/sunflower */
+  border-top-color: #f2b010;
+  background-color: #FAF9F5;
+}
+
+.events .single-event.malmo-nation {
+  /* Green */
+  border-top-color: #2abd68;
+  background-color: #F5FAF7;
+}
+
+.events .single-event.kalmar-nation {
+  /* Low red */
+  border-top-color: #F26248;
+  background-color: #FAF6F5;
+}
+
 .events .single-event.sydskanska-nationen {
+  /* Dark blue */
   border-top-color: #5079F1;
   background-color: #F5F7FA;
 }
 
 .events .single-event.ostgota-nation {
+  /* Green */
   border-top-color: #A7E15A;
   background-color: #F8FAF5;
 }
