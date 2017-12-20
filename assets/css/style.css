@@ -308,6 +308,12 @@ body {
   background-color: #FAF6F5;
 }
 
+.events .single-event.wermlands-nation {
+  /* Brown */
+  border-top-color: #b29877;
+  background-color: #FAF8F5;
+}
+
 .events .single-event.sydskanska-nationen {
   /* Dark blue */
   border-top-color: #5079F1;
