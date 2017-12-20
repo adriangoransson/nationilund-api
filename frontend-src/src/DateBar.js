@@ -1,10 +1,9 @@
 import m from 'mithril';
 import moment from 'moment';
+import 'moment/locale/sv';
 import Events from './Events';
 import DatePickerModal from './DatePickerModal';
 import State from './State';
-
-moment.locale('sv');
 
 export default {
   selectedDate: moment(),
@@ -31,6 +30,7 @@ export default {
 
     const diff = date.diff(moment(), 'days');
     if (diff < 6 && diff > 0) {
+      date.locale('sv');
       return date.format('dddd');
     }
 
