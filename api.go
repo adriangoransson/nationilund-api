@@ -38,7 +38,7 @@ func setupApi(router *gin.Engine) {
 		day.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentDay()
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
@@ -68,7 +68,7 @@ func setupApi(router *gin.Engine) {
 		week.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentWeek()
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
@@ -98,7 +98,7 @@ func setupApi(router *gin.Engine) {
 		month.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentMonth()
 			if err != nil {
-				c.AbortWithError(400, err)
+				c.AbortWithError(503, err)
 				return
 			}
 
