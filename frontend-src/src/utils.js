@@ -3,9 +3,6 @@ function padNumber(n) {
 }
 
 function apiDateFormat(date) {
-  const offset = date.getTimezoneOffset() / 60;
-  date.setHours(date.getHours() - offset);
-
   const year = date.getFullYear();
   const month = padNumber(date.getMonth() + 1);
   const day = padNumber(date.getDate());
