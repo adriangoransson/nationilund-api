@@ -1,18 +1,12 @@
 import m from 'mithril';
 import Events from './Events';
-import Datepicker from './datepicker';
-
-const dateCallback = (date) => {
-  Events.load(date);
-  m.redraw();
-};
+import DateBar from './DateBar';
 
 const View = {
   filter: true,
   oninit: Events.load,
   view(vnode) {
     let data = Events.list;
-    let showMore;
 
     if (!Events.loading) {
       if (Events.error) {
@@ -40,35 +34,17 @@ const View = {
           data = filteredData;
         }
       }
-
-      const disableFilter = () => {
-        vnode.state.filter = false;
-      };
-
-      const filtered = Events.list.length - data.length;
-      if (filtered) {
-        showMore = (
-          m(
-            '.card text-center',
-            m(
-              '.card-header[style=cursor:pointer][title=Show]',
-              { onclick: disableFilter },
-              `${filtered} past events are hidden. Click to show.`,
-            ),
-          )
-        );
-      }
     }
 
+    const loadingIndicator = m.trust('<div class="loader loader--style3" title="2"> <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve"> <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z"> <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"/> </path> </svg> </div>');
+
     return m('div', [
-      m('p', [
-        'Currently showing... ',
-        m(Datepicker, { callback: dateCallback, el: 'span' }),
+      m(DateBar),
+      m('.events.container', [
+        Events.loading ? loadingIndicator : [
+          data.map(event => m(event)),
+        ],
       ]),
-      Events.loading ? m('div.text-center', 'Loading') : [
-        showMore,
-        data.map(event => m(event)),
-      ],
     ]);
   },
 };

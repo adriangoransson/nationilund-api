@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Source+Code+Pro');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #1D1D1D;
+  font-family: Lato, sans-serif;
+}
+
+.container {
+  display: flex;
+  margin: 0 auto;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Header */
+.header {
+  border-bottom: 1px solid #F3F3F3;
+  padding: 10px 15px;
+}
+
+.header .logo {
+  height: 25px;
+}
+
+.header .menu {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header .menu-item {
+  color: #B0B0B0;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+.header .menu-item.current {
+  color: #1D1D1D;
+}
+
+/* General content */
+.main {
+  margin: 0 auto;
+  line-height: 1.5;
+  max-width: 700px;
+  width: 100%;
+  padding: 20px 15px;
+}
+
+.main a {
+  color: #87D225;
+  text-decoration: none;
+}
+
+.main a:hover {
+  text-decoration: underline;
+}
+
+.main h1,
+.main h2,
+.main h3 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.main h1 {
+  font-size: 32px;
+}
+
+.main h2 {
+  font-size: 26px;
+}
+
+.main h3 {
+  font-size: 22px;
+}
+
+.main p {
+  margin-bottom: 1em;
+}
+
+.main code {
+  background: #F9FAF8;
+  border-radius: 3px;
+  font-family: 'Source Code Pro', monospace;
+  padding: .2rem .4rem;
+}
+
+.main pre {
+  margin-bottom: 1em;
+  overflow: scroll;
+}
+
+.main pre code {
+  display: block;
+  padding: 10px 5px;
+}
+
+.main table {
+  width: 100%;
+}
+
+.main th {
+  font-weight: 700;
+  text-align: left;
+}
+
+.main th,
+.main td {
+  padding: .2em .5em;
+}
+
+/* Date bar */
+.date-bar {
+  border-bottom: 1px solid #F3F3F3;
+  display: flex;
+  font-size: 14px;
+}
+
+.date-bar .date-picker-button {
+  align-items: center;
+  border-right: 1px solid #F3F3F3;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+}
+
+.date-bar .date-picker-button img {
+  width: 16px;
+}
+
+.date-bar .date-navigation {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 60px;
+}
+
+.date-bar .link-wrapper {
+  display: flex;
+  max-width: 300px;
+  width: 100%;
+}
+
+.date-bar .date {
+  color: #B0B0B0;
+  cursor: pointer;
+  flex: 1;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 0;
+}
+
+.date-bar .date.current-date {
+  color: #1D1D1D;
+  cursor: auto;
+}
+
+/* Date picker modal */
+
+.date-picker-modal .overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  background: rgba(0,0,0,0.8);
+  transition: all 0.3s;
+}
+
+.date-picker-modal.open .overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.date-picker-modal .modal {
+  background: white;
+  border-radius: 3px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 90%;
+  z-index: 2000;
+  visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateX(-50%) translateY(-50%) scale(0.7);
+  -moz-transform: translateX(-50%) translateY(-50%) scale(0.7);
+  -ms-transform: translateX(-50%) translateY(-50%) scale(0.7);
+  transform: translateX(-50%) translateY(-50%) scale(0.7);
+  padding: 15px 20px;
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.date-picker-modal.open .modal {
+  visibility: visible;
+  -webkit-transform: translateX(-50%) translateY(-50%) scale(1);
+  -moz-transform: translateX(-50%) translateY(-50%) scale(1);
+  -ms-transform: translateX(-50%) translateY(-50%) scale(1);
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+/* Pikaday */
+.pika-single {
+  border: none;
+  font-family: inherit;
+}
+
+.is-today .pika-button {
+  color: #A7E15A;
+}
+
+.is-selected .pika-button {
+  background: #A7E15A;
+  box-shadow: none;
+}
+
+.pika-button:hover {
+  background: #A7E15A;
+}
+
+.is-today .pika-button:hover {
+  color: #fff;
+}
+
+/* Events */
+.events {
+  flex-direction: column;
+  padding: 20px 15px;
+}
+
+.loader {
+  height: 100px;
+  text-align: center;
+  width: 100%;
+}
+
+.loader svg path,
+.loader svg rect{
+  fill: #A7E15A;
+}
+
+.events .single-event {
+  background-color: #FAF9F5;
+  border-top: 4px solid #FCDA5A;
+  cursor: pointer;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+}
+
+.events .signle-event.vastgota-nation {
+  /* Default yellow */
+}
+
+.events .single-event.helsingkrona-nation {
+  /* Mint */
+  border-top-color: #18AE90;
+  background-color: #F5FAF9;
+}
+
+.events .single-event.goteborgs-nation {
+  /* Red */
+  border-top-color: #CB2C43;
+  background-color: #FAF5F6;
+}
+
+.events .single-event.blekingska-nationen {
+  /* Purple */
+  border-top-color: #944eb1;
+  background-color: #F9F5FA;
+}
+
+.events .single-event.hallands-nation {
+  /* Pink */
+  border-top-color: #e17bb6;
+  background-color: #FAF5F8;
+}
+
+.events .single-event.lunds-nation {
+  /* Orange/sunflower */
+  border-top-color: #f2b010;
+  background-color: #FAF9F5;
+}
+
+.events .single-event.malmo-nation {
+  /* Green */
+  border-top-color: #2abd68;
+  background-color: #F5FAF7;
+}
+
+.events .single-event.kalmar-nation {
+  /* Low red */
+  border-top-color: #F26248;
+  background-color: #FAF6F5;
+}
+
+.events .single-event.wermlands-nation {
+  /* Brown */
+  border-top-color: #b29877;
+  background-color: #FAF8F5;
+}
+
+.events .single-event.sydskanska-nationen {
+  /* Dark blue */
+  border-top-color: #5079F1;
+  background-color: #F5F7FA;
+}
+
+.events .single-event.ostgota-nation {
+  /* Green */
+  border-top-color: #A7E15A;
+  background-color: #F8FAF5;
+}
+
+.events .single-event .content {
+  padding-right: 30px;
+  position: relative;
+}
+
+.events .single-event .time {
+  color: #000;
+  font-size: 14px;
+  margin-bottom: 8px;
+  opacity: 0.3;
+}
+
+.events .single-event .title {
+  color: #1E1E1E;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  opacity: 0.8;
+}
+
+.events .single-event .plus {
+  height: 20px;
+  position: absolute;
+  margin-top: -10px;
+  opacity: 0.1;
+  right: 0;
+  top: 50%;
+  width: 20px;
+}
+
+.events .single-event .plus:before {
+  content: '';
+  background: #000;
+  height: 2px;
+  position: absolute;
+  top: 9px;
+  width: 100%;
+}
+
+.events .single-event .plus:after {
+  content: '';
+  background: #000;
+  height: 100%;
+  left: 9px;
+  position: absolute;
+  width: 2px;
+}
+
+.events .single-event.open .plus:after {
+  display: none;
+}
+
+.events .single-event .description {
+  font-size: 14px;
+  height: 0;
+  line-height: 1.3;
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+.events .single-event.open .description {
+  height: auto;
+}
+
+.events .single-event .description p {
+  padding-top: 20px;
+}
+
+
+/* Media queries */
+@media screen and (min-width: 730px) {
+  .header {
+    padding: 15px;
+  }
+
+  .header .logo {
+    height: 35px;
+  }
+
+  .header .menu-item {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  .main {
+    padding: 20px 0;
+  }
+
+  .date-bar .date-navigation {
+    padding-right: 70px;
+  }
+
+  .date-bar .date-picker-button {
+    border-left: 1px solid #F3F3F3;
+    width: 60px;
+  }
+
+  .date-bar .date-picker-button img {
+    width: 20px;
+  }
+
+  .date-bar .date {
+    font-size: 18px;
+    padding: 15px 0;
+  }
+
+  .events {
+    padding: 20px 0;
+  }
+}

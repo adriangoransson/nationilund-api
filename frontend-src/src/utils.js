@@ -37,8 +37,38 @@ function diffTime(dateStart, dateEnd) {
   return { started, ongoing };
 }
 
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/(ä|å)/g, 'a')
+    .replace(/ö/g, 'o')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+function intersperse(arr, el) {
+  const res = [];
+  let i = 0;
+
+  if (i < arr.length) {
+    res.push(arr[i + 1]);
+    i += 1;
+  }
+
+  while (i < arr.length) {
+    res.push(el, arr[i + 1]);
+    i += 1;
+  }
+
+  return res;
+}
+
 export default {
   apiDateFormat,
   formatHours,
   diffTime,
+  slugify,
+  intersperse,
 };

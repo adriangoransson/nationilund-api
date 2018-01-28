@@ -1,5 +1,5 @@
 import m from 'mithril';
-
+import moment from 'moment';
 import Event from './Event';
 import config from './config';
 import utils from './utils';
@@ -8,10 +8,19 @@ const Events = {
   list: [],
   error: '',
   loading: false,
+  timeout: null,
+  selectedDate: moment(),
+  loadDelayed() {
+    Events.loading = true;
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => this.load(), 200);
+    m.redraw();
+  },
 
-  load(date = new Date()) {
+  load() {
     Events.loading = true;
     let url = config.API_URL;
+    const date = Events.selectedDate.toDate();
 
     if (date !== null && date.toISOString) {
       const iso = utils.apiDateFormat(date);

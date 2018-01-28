@@ -1,27 +1,26 @@
 {{ template "base.header.tmpl" . }}
 
-<h1>{{ .title }}</h1>
+<div class="main">
+  <h1>{{ .title }}</h1>
 
-<p>Base URL <code>https://nationilund.se/api</code></p>
+  <p>Base URL <code>https://nationilund.se/api</code></p>
 
-<p>Get events for today, this week or this month.</p>
-<pre class="bg-light"><code>  GET /day
+  <p>Get events for today, this week or this month.</p>
+  <pre><code>  GET /day
   GET /week
-  GET /month
-</code></pre>
+  GET /month</code></pre>
 
-<p>Get events for a specific date, or the week/month that date occurs.<br>
-These routes are IP limited to 30 requests/minute.</p>
+  <p>Get events for a specific date, or the week/month that date occurs.<br>
+  These routes are IP limited to 30 requests/minute.</p>
 
-<pre class="bg-light"><code>  GET /day/YYYY-MM-DD
+  <pre><code>  GET /day/YYYY-MM-DD
   GET /week/YYYY-MM-DD
-  GET /month/YYYY-MM-DD
-</code></pre>
+  GET /month/YYYY-MM-DD</code></pre>
 
-<h2>Response</h2>
-<p>A JSON list of event objects.</p>
+  <h2>Response</h2>
+  <p>A JSON list of event objects.</p>
 
-<pre class="bg-light"><code>[
+  <pre><code>[
   {
     id              string
     summary         string
@@ -42,31 +41,31 @@ These routes are IP limited to 30 requests/minute.</p>
     }
   },
   {...}
-]
-</code></pre>
+]</code></pre>
 
-<p>In case of errors the API response will have one of the following status codes.</p>
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th>Status code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>400</td>
-      <td>Date was incorrectly formatted.</td>
-    </tr>
-    <tr>
-      <td>429</td>
-      <td>Rate limit exceeded.</td>
-    </tr>
-    <tr>
-      <td>503</td>
-      <td>Internal fetching of data failed.</td>
-    </tr>
-  </tbody>
-</table>
+  <p>In case of errors the API response will have one of the following status codes.</p>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>Status code</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>400</td>
+        <td>Date was incorrectly formatted.</td>
+      </tr>
+      <tr>
+        <td>429</td>
+        <td>Rate limit exceeded.</td>
+      </tr>
+      <tr>
+        <td>503</td>
+        <td>Internal fetching of data failed.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 {{ template "base.footer.tmpl" }}
