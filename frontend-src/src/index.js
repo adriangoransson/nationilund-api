@@ -61,10 +61,7 @@ const View = {
     }
 
     return m('div', [
-      m('p', [
-        'Currently showing... ',
-        m(Datepicker, { callback: dateCallback, el: 'span' }),
-      ]),
+      m(Datepicker, { callback: dateCallback }),
       Events.loading ? m('div.text-center', 'Loading') : [
         showMore,
         data.map(event => m(event)),

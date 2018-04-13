@@ -55,7 +55,7 @@ function Event(data) {
         m(
           '.card.mt-3.md-3',
           m(
-            `.card-header[style=cursor:pointer][title=${cardTitle}]`, { onclick: toggleCollapse },
+            `.card-header.has-cursor[title=${cardTitle}]`, { onclick: toggleCollapse },
             event.summary,
             m(
               '.float-lg-right', timeOpts,

@@ -1,19 +1,21 @@
 import m from 'mithril';
+import isToday from 'date-fns/is_today';
+import format from 'date-fns/format';
+import addDays from 'date-fns/add_days';
 import Pikaday from 'pikaday';
 import utils from './utils';
 
 export default {
   picker: null,
-  date: null,
+  date: new Date(),
   oncreate(vnode) {
     /* global document */
     const button = document.createElement('button');
-    button.innerText = `Today (${utils.apiDateFormat(new Date())})`;
+    button.innerText = utils.apiDateFormat(new Date());
     button.type = 'button';
-    button.classList = 'btn btn-light';
-    button.style = 'cursor: pointer;';
+    button.classList = 'btn btn-light has-cursor';
 
-    vnode.dom.appendChild(button);
+    vnode.dom.querySelector('#picker').appendChild(button);
 
     vnode.state.picker = new Pikaday({
       field: button,
@@ -28,7 +30,32 @@ export default {
     });
   },
   view(vnode) {
-    const el = vnode.attrs.el ? vnode.attrs.el : 'div';
-    return m(el);
+    const setDate = (newDate) => {
+      vnode.state.date = newDate;
+      vnode.state.picker.setDate(newDate);
+    };
+    const changeDate = days => addDays(vnode.state.date, days);
+    const incrementDate = () => {
+      setDate(changeDate(1));
+    };
+    const decrementDate = () => {
+      setDate(changeDate(-1));
+    };
+
+    const todayFilter = (today, date) => {
+      if (isToday(vnode.state.date)) {
+        return today;
+      }
+      if (isToday(date)) {
+        return 'Today';
+      }
+      return format(date, 'ddd Do');
+    };
+
+    return m('div.text-center', [
+      m('button.btn.btn-light.has-cursor', { onclick: decrementDate }, todayFilter('Yesterday', changeDate(-1))),
+      m('span#picker.mx-2.mx-sm-5'),
+      m('button.btn.btn-light.has-cursor', { onclick: incrementDate }, todayFilter('Tomorrow', changeDate(1))),
+    ]);
   },
 };
