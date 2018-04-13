@@ -49,11 +49,11 @@ const View = {
       if (filtered) {
         showMore = (
           m(
-            '.card text-center',
+            '.card text-center.my-3',
             m(
               '.card-header[style=cursor:pointer][title=Show]',
               { onclick: disableFilter },
-              `${filtered} past events are hidden. Click to show.`,
+              `${filtered} past ${filtered > 1 ? 'events are' : 'event is'} hidden. Click to show.`,
             ),
           )
         );
