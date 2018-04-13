@@ -20,6 +20,7 @@ const View = {
       m.route.set('/');
     }
     Events.load(vnode.state.date);
+    m.redraw();
   },
   oninit(vnode) {
     vnode.state.dateString = vnode.attrs.date;
@@ -83,7 +84,7 @@ const View = {
 
     return m('div', [
       m(Datepicker, { date: vnode.state.date, callback: dateCallback }),
-      Events.loading ? m('div.text-center', 'Loading') : [
+      Events.loading ? m('div.text-center.my-3', 'Loading...') : [
         showMore,
         data.map(event => m(event)),
       ],
