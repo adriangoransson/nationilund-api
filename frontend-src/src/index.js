@@ -1,15 +1,36 @@
 import m from 'mithril';
+import parse from 'date-fns/parse';
 import Events from './Events';
 import Datepicker from './datepicker';
+import utils from './utils';
 
 const dateCallback = (date) => {
-  Events.load(date);
-  m.redraw();
+  m.route.set(`/${utils.apiDateFormat(date)}`);
 };
 
 const View = {
   filter: true,
-  oninit: Events.load,
+  dateString: null,
+  date: new Date(),
+  fetch(vnode) {
+    if (vnode.state.dateString &&
+        vnode.state.dateString.match(/^\d\d\d\d-\d\d-\d\d$/)) {
+      vnode.state.date = parse(vnode.state.dateString);
+    } else {
+      m.route.set('/');
+    }
+    Events.load(vnode.state.date);
+  },
+  oninit(vnode) {
+    vnode.state.dateString = vnode.attrs.date;
+    vnode.state.fetch(vnode);
+  },
+  onupdate(vnode) {
+    if (vnode.attrs.date !== vnode.state.dateString) {
+      vnode.state.dateString = vnode.attrs.date;
+      vnode.state.fetch(vnode);
+    }
+  },
   view(vnode) {
     let data = Events.list;
     let showMore;
@@ -61,7 +82,7 @@ const View = {
     }
 
     return m('div', [
-      m(Datepicker, { callback: dateCallback }),
+      m(Datepicker, { date: vnode.state.date, callback: dateCallback }),
       Events.loading ? m('div.text-center', 'Loading') : [
         showMore,
         data.map(event => m(event)),
@@ -72,4 +93,6 @@ const View = {
 
 /* global document */
 const root = document.querySelector('#events-list');
-m.mount(root, View);
+m.route(root, `/${utils.apiDateFormat(new Date())}`, {
+  '/:date': View,
+});

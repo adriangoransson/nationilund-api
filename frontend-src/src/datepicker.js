@@ -8,12 +8,26 @@ import utils from './utils';
 export default {
   picker: null,
   date: new Date(),
+  button: null,
+  oninit(vnode) {
+    if (vnode.attrs.date) {
+      vnode.state.date = vnode.attrs.date;
+    }
+  },
+  onbeforeupdate(vnode) {
+    if (vnode.attrs.date && vnode.attrs.date !== vnode.state.date) {
+      vnode.state.date = vnode.attrs.date;
+      vnode.state.button.innerText = utils.apiDateFormat(vnode.state.date);
+    }
+  },
   oncreate(vnode) {
     /* global document */
     const button = document.createElement('button');
     button.innerText = utils.apiDateFormat(new Date());
     button.type = 'button';
     button.classList = 'btn btn-light has-cursor';
+
+    vnode.state.button = button;
 
     vnode.dom.querySelector('#picker').appendChild(button);
 
@@ -28,6 +42,8 @@ export default {
       firstDay: 1,
       yearRange: 1,
     });
+
+    vnode.state.picker.setDate(vnode.attrs.date);
   },
   view(vnode) {
     const setDate = (newDate) => {
