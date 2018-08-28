@@ -17,23 +17,16 @@ func main() {
 
 	setupApi(router)
 
-	router.LoadHTMLGlob("templates/*")
-
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(200, "index.tmpl", gin.H{})
-	})
-
-	router.GET("/about", func(c *gin.Context) {
-		title := "About"
-		c.HTML(200, "about.tmpl", gin.H{"title": title})
-	})
-
-	router.Static("/assets", "./assets")
+	port := ":8080"
+	envPort := os.Getenv("NL_PORT")
+	if envPort != "" {
+		port = ":" + envPort
+	}
 
 	// Handle server and shutdown. This is a copy-paste from the readme.
 	// https://github.com/gin-gonic/gin/blob/master/examples/graceful-shutdown/graceful-shutdown/server.go
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    port,
 		Handler: router,
 	}
 

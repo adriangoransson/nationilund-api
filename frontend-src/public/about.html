@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About - Nation i Lund</title>
+  <meta name="description" content="Find out what's happening at the student nations in Lund tonight!">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/pikaday@1.6.1/css/pikaday.css">
+  <style>
+    .has-cursor {
+      cursor: pointer;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Nation i Lund</a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/api.html">API</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-3 mb-3">
+    <h1>About</h1>
+
+    <p>Nation i Lund is a service that aims to provide a faster and easier way to find out what is happening around the student nations in Lund.<br>
+      It's built on top of data available at <a href="https://www.studentlund.se/">studentlund.se</a>, wrapping it in a nicer <a href="/api">JSON API</a>.</p>
+
+      <h3>Open source</h3>
+      <p>Every line of code behind Nation i Lund is open source and available at Github.</p>
+      <dl>
+        <dt><a href="https://github.com/adriangoransson/studentlund">adriangoransson/studentlund</a></dt>
+        <dd>Go library to parse data from studentlund.se.</dd>
+        <dt><a href="https://github.com/adriangoransson/nationilund">adriangoransson/nationilund</a></dt>
+        <dd>This site. With backend written in Go using the Gin framework and frontend using Mithril and Bootstrap.</dd>
+      </dl>
+
+      <h3>Creator</h3>
+      <p>Nation i Lund was created by <a href="https://adriang.se">Adrian Göransson</a>, Computer Science and Engineering student at Lund University (LTH D17).</p>
+    </main>
+  </body>
+  </html>

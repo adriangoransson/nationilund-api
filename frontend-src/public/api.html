@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>API - Nation i Lund</title>
+  <meta name="description" content="Find out what's happening at the student nations in Lund tonight!">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/pikaday@1.6.1/css/pikaday.css">
+  <style>
+    .has-cursor {
+      cursor: pointer;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+  <nav class="navbar navbar-expand navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">Nation i Lund</a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/api.html">API</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-3 mb-3">
+    <h1>Api</h1>
+
+    <p>Base URL <code>https://api.nationilund.se</code></p>
+
+    <p>Get events for today, this week or this month.</p>
+    <pre class="bg-light"><code>  GET /day
+      GET /week
+      GET /month
+    </code></pre>
+
+    <p>Get events for a specific date, or the week/month that date occurs.<br>
+      These routes are IP limited to 30 requests/minute.</p>
+
+      <pre class="bg-light"><code>  GET /day/YYYY-MM-DD
+        GET /week/YYYY-MM-DD
+        GET /month/YYYY-MM-DD
+      </code></pre>
+
+      <h2>Response</h2>
+      <p>A JSON list of event objects.</p>
+
+      <pre class="bg-light"><code>[
+        {
+          id              string
+          summary         string
+          description     string
+          url             string
+          image_url       string
+          location        string
+
+          organizer {
+            name          string
+            email         string
+          }
+
+          date {
+            start         date string (RFC3339)
+            end           date string (RFC3339)
+            last_updated  date string (RFC3339)
+          }
+        },
+        {...}
+        ]
+      </code></pre>
+
+      <p>In case of errors the API response will have one of the following status codes.</p>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Status code</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>400</td>
+            <td>Date was incorrectly formatted.</td>
+          </tr>
+          <tr>
+            <td>429</td>
+            <td>Rate limit exceeded.</td>
+          </tr>
+          <tr>
+            <td>503</td>
+            <td>Internal fetching of data failed.</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+  </html>

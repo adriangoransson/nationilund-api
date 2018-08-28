@@ -16,7 +16,6 @@ import (
 )
 
 func setupApi(router *gin.Engine) {
-	api := router.Group("/api")
 	cacheStore := persistence.NewInMemoryStore(time.Hour)
 	limiterStore := memory.NewStore()
 
@@ -26,14 +25,9 @@ func setupApi(router *gin.Engine) {
 	}
 	rateLimiter := ginLimiter.NewMiddleware(limiter.New(limiterStore, rateLimit))
 
-	api.Use(cors.Default())
+	router.Use(cors.Default())
 
-	api.GET("/", func(c *gin.Context) {
-		title := "API"
-		c.HTML(200, "api.tmpl", gin.H{"title": title})
-	})
-
-	day := api.Group("/day")
+	day := router.Group("/day")
 	{
 		day.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentDay()
@@ -63,7 +57,7 @@ func setupApi(router *gin.Engine) {
 		}))
 	}
 
-	week := api.Group("/week")
+	week := router.Group("/week")
 	{
 		week.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentWeek()
@@ -93,7 +87,7 @@ func setupApi(router *gin.Engine) {
 		}))
 	}
 
-	month := api.Group("/month")
+	month := router.Group("/month")
 	{
 		month.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
 			events, err := studentlund.GetCurrentMonth()
