@@ -18,7 +18,7 @@ func main() {
 	setupApi(router)
 
 	port := ":8080"
-	envPort := os.Getenv("NL_PORT")
+	envPort := os.Getenv("PORT")
 	if envPort != "" {
 		port = ":" + envPort
 	}

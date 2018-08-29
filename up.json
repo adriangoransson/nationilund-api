@@ -1,0 +1,15 @@
+{
+  "name": "nationilund-api",
+  "profile": "nationilund",
+  "regions": [
+    "eu-central-1"
+  ],
+  "cors": {
+    "enable": true
+  },
+  "stages": {
+    "production": {
+      "domain": "api.nationilund.se"
+    }
+  }
+}
