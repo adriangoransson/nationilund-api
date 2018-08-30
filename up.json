@@ -9,7 +9,8 @@
   },
   "stages": {
     "production": {
-      "domain": "api.nationilund.se"
+      "domain": "api.nationilund.se",
+      "zone": false
     }
   }
 }
