@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strings"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -14,6 +15,26 @@ import (
 
 	"github.com/adriangoransson/studentlund"
 )
+
+func nationFilter(events []studentlund.Event, filter bool) []studentlund.Event {
+	if !filter {
+		return events
+	}
+
+	filtered := make([]studentlund.Event, 0)
+
+	for _, event := range events {
+		if strings.Contains(event.Organizer.Name, "Nation") {
+			filtered = append(filtered, event)
+		}
+	}
+
+	return filtered
+}
+
+func filterParam(c *gin.Context) bool {
+	return c.Query("all") == ""
+}
 
 func setupApi(router *gin.Engine) {
 	cacheStore := persistence.NewInMemoryStore(time.Hour)
@@ -36,7 +57,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 
 		day.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
@@ -53,7 +74,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 	}
 
@@ -66,7 +87,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 
 		week.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
@@ -83,7 +104,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 	}
 
@@ -96,7 +117,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 
 		month.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
@@ -113,7 +134,7 @@ func setupApi(router *gin.Engine) {
 				return
 			}
 
-			c.JSON(200, events)
+			c.JSON(200, nationFilter(events, filterParam(c)))
 		}))
 	}
 }
