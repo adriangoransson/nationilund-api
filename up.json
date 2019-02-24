@@ -12,5 +12,11 @@
       "domain": "api.nationilund.se",
       "zone": false
     }
+  },
+  "lambda": {
+    "memory": 256
+  },
+  "proxy": {
+    "timeout": 5
   }
 }
