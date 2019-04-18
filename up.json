@@ -2,7 +2,7 @@
   "name": "nationilund-api",
   "profile": "nationilund",
   "regions": [
-    "eu-central-1"
+    "eu-north-1"
   ],
   "cors": {
     "enable": true
