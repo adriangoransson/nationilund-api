@@ -36,7 +36,7 @@ func main() {
 		}
 	}()
 
-    log.Printf("Listening on %s\n", port)
+	log.Printf("Listening on %s\n", port)
 
 	// Wait for interrupt signal to gracefully shutdown the server with
 	// a timeout of 5 seconds.
