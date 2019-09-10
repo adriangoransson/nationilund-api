@@ -1,6 +1,9 @@
 {
   "name": "nationilund-api",
   "profile": "nationilund",
+  "environment": {
+    "GIN_MODE": "release"
+  },
   "regions": [
     "eu-north-1"
   ],
