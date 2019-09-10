@@ -2,16 +2,9 @@ package main
 
 import (
 	"strings"
-	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/ulule/limiter"
-	ginLimiter "github.com/ulule/limiter/drivers/middleware/gin"
-	"github.com/ulule/limiter/drivers/store/memory"
-
-	"github.com/adriangoransson/gin-cache"
-	"github.com/adriangoransson/gin-cache/persistence"
 
 	"github.com/adriangoransson/studentlund"
 )
@@ -37,20 +30,11 @@ func filterParam(c *gin.Context) bool {
 }
 
 func setupApi(router *gin.Engine) {
-	cacheStore := persistence.NewInMemoryStore(time.Hour)
-	limiterStore := memory.NewStore()
-
-	rateLimit := limiter.Rate{
-		Period: time.Minute,
-		Limit:  30,
-	}
-	rateLimiter := ginLimiter.NewMiddleware(limiter.New(limiterStore, rateLimit))
-
 	router.Use(cors.Default())
 
 	day := router.Group("/day")
 	{
-		day.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
+		day.GET("", func(c *gin.Context) {
 			events, err := studentlund.GetCurrentDay()
 			if err != nil {
 				c.AbortWithError(503, err)
@@ -58,9 +42,9 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 
-		day.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
+		day.GET("/:date", func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {
@@ -75,12 +59,12 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 	}
 
 	week := router.Group("/week")
 	{
-		week.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
+		week.GET("", func(c *gin.Context) {
 			events, err := studentlund.GetCurrentWeek()
 			if err != nil {
 				c.AbortWithError(503, err)
@@ -88,9 +72,9 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 
-		week.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
+		week.GET("/:date", func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {
@@ -105,12 +89,12 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 	}
 
 	month := router.Group("/month")
 	{
-		month.GET("", cache.CachePageWithDurationFn(cacheStore, getCacheDuration(time.Hour), func(c *gin.Context) {
+		month.GET("", func(c *gin.Context) {
 			events, err := studentlund.GetCurrentMonth()
 			if err != nil {
 				c.AbortWithError(503, err)
@@ -118,9 +102,9 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 
-		month.GET("/:date", rateLimiter, cache.CachePage(cacheStore, time.Hour, func(c *gin.Context) {
+		month.GET("/:date", func(c *gin.Context) {
 			date, err := parseDate(c.Param("date"))
 
 			if err != nil {
@@ -135,6 +119,6 @@ func setupApi(router *gin.Engine) {
 			}
 
 			c.JSON(200, nationFilter(events, filterParam(c)))
-		}))
+		})
 	}
 }
