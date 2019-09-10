@@ -15,7 +15,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	setupApi(router)
+	setupAPI(router)
 
 	port := ":8080"
 	envPort := os.Getenv("PORT")

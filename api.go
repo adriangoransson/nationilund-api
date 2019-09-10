@@ -2,6 +2,7 @@ package main
 
 import (
 	"strings"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -29,7 +30,17 @@ func filterParam(c *gin.Context) bool {
 	return c.Query("all") == ""
 }
 
-func setupApi(router *gin.Engine) {
+func getDateFromContext(c *gin.Context) (time.Time, bool) {
+	t, err := time.Parse("2006-01-02", c.Param("date"))
+	if err != nil {
+		c.AbortWithError(400, err)
+		return time.Now(), false
+	}
+
+	return t, true
+}
+
+func setupAPI(router *gin.Engine) {
 	router.Use(cors.Default())
 
 	day := router.Group("/day")
@@ -45,10 +56,8 @@ func setupApi(router *gin.Engine) {
 		})
 
 		day.GET("/:date", func(c *gin.Context) {
-			date, err := parseDate(c.Param("date"))
-
-			if err != nil {
-				c.AbortWithError(400, err)
+			date, ok := getDateFromContext(c)
+			if !ok {
 				return
 			}
 
@@ -75,10 +84,8 @@ func setupApi(router *gin.Engine) {
 		})
 
 		week.GET("/:date", func(c *gin.Context) {
-			date, err := parseDate(c.Param("date"))
-
-			if err != nil {
-				c.AbortWithError(400, err)
+			date, ok := getDateFromContext(c)
+			if !ok {
 				return
 			}
 
@@ -105,10 +112,8 @@ func setupApi(router *gin.Engine) {
 		})
 
 		month.GET("/:date", func(c *gin.Context) {
-			date, err := parseDate(c.Param("date"))
-
-			if err != nil {
-				c.AbortWithError(400, err)
+			date, ok := getDateFromContext(c)
+			if !ok {
 				return
 			}
 
